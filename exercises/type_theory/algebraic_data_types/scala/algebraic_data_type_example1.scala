@@ -30,6 +30,11 @@ def dist(a: Point, b: Point) = {
   }
 }
 
+////// To have k * Point ////////
+// - This is to have k*Point in addition to Point*k above implemented 
+// - It is implemented by defining an extension of Double with the product operator defined for Point and 
+// - an implicit conversion function which Scala can use so 
+// - when it finds the pattern k * Point it can see it is defined with MyDouble and can use the implicit conversion function to do the convesion and use this method 
 class MyDouble(val x:Double) {
   def *(p: Point) = {
     p match {
@@ -40,6 +45,7 @@ class MyDouble(val x:Double) {
 }
 
 implicit def d2bd(x: Double) = new MyDouble(x)
+///////////
 
 
 print(3*Point2D(1,2)+"\n")
