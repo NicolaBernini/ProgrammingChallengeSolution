@@ -7,24 +7,26 @@ import re
 import sys
 
 
+# Complete the hourglassSum function below.
 def compute(a, r, c, m): 
-    s = len(m)
-    res = 0
-    for i in range(s):
-        for j in range(s):
-            res += a[r+i][c+j] * m[i][j]
+    res = 0    
+    # Iterate over the 2D conv mask
+    for i, j in itertools.product( range(len(m)), range(len(m[0])) ):
+        res += a[r+i][c+j] * m[i][j]
     return res 
 
 
 def hourglassSum(arr):
     res = None
+    
+    # Hourglass Mask 
     m = [[1,1,1],[0,1,0],[1,1,1]]
-    for r in range(len(arr)-len(m)+1):
-        for c in range(len(arr[0])-len(m[0])+1):
-            temp = compute(a=arr, r=r, c=c, m=m)
-            if res is None: res = temp
-            else:
-                if temp > res: res=temp
+    
+    # Iterate over the input matrix with the conv 
+    for r,c in itertools.product(range(len(arr)-len(m)+1), range(len(arr[0])-len(m[0])+1)):
+        temp = compute(a=arr, r=r, c=c, m=m)
+        # Track the max value 
+        res = temp if res is None else (temp if temp > res else res)
     return res
 
 if __name__ == '__main__':
