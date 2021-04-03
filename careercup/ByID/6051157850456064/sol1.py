@@ -7,6 +7,10 @@ class Node:
     self.left = left
     self.right = right
 
+  def fromString(self, s):
+    for n in s.split(','):
+      self.insert(val=int(n))
+
   def insert(self, val):
     if self.val == None:
       self.val = val
